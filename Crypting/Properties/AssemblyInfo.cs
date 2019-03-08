@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Webszinkron")]
+[assembly: AssemblyTitle("Crypting")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Zoltán Tajti")]
-[assembly: AssemblyProduct("Webszinkron")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("Crypting")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("66e34f9b-e246-43f0-9af1-ed363918fcb8")]
+[assembly: Guid("32227c43-5b1a-4fe7-b981-034f5d9678c7")]
 
 // Version information for an assembly consists of the following four values:
 //

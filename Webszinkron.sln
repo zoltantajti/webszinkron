@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webszinkron", "Webszinkron\Webszinkron.csproj", "{66E34F9B-E246-43F0-9AF1-ED363918FCB8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "Database\Database.csproj", "{8BB1055E-C9F5-4C3F-ACBD-5FDF37EA93CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crypting", "Crypting\Crypting.csproj", "{32227C43-5B1A-4FE7-B981-034F5D9678C7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{66E34F9B-E246-43F0-9AF1-ED363918FCB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66E34F9B-E246-43F0-9AF1-ED363918FCB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66E34F9B-E246-43F0-9AF1-ED363918FCB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BB1055E-C9F5-4C3F-ACBD-5FDF37EA93CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BB1055E-C9F5-4C3F-ACBD-5FDF37EA93CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BB1055E-C9F5-4C3F-ACBD-5FDF37EA93CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BB1055E-C9F5-4C3F-ACBD-5FDF37EA93CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32227C43-5B1A-4FE7-B981-034F5D9678C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32227C43-5B1A-4FE7-B981-034F5D9678C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32227C43-5B1A-4FE7-B981-034F5D9678C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32227C43-5B1A-4FE7-B981-034F5D9678C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
