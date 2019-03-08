@@ -110,10 +110,12 @@
             this.contextMS.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.showProgram});
             this.contextMS.Name = "contextMS";
-            this.contextMS.Size = new System.Drawing.Size(151, 26);
+            this.contextMS.Size = new System.Drawing.Size(181, 48);
             // 
             // showProgram
             // 
+            this.showProgram.Image = global::Webszinkron.Properties.Resources.sync;
+            this.showProgram.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.showProgram.Name = "showProgram";
             this.showProgram.Size = new System.Drawing.Size(180, 22);
             this.showProgram.Text = "Előtérbe hozás";

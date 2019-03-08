@@ -80,20 +80,14 @@ namespace Webszinkron
             close();
         }
         #endregion
-
-        private void notif_DoubleClick(object Sender, EventArgs e)
-        {
-            if(this.WindowState == FormWindowState.Minimized)
-                this.WindowState = FormWindowState.Normal;
-            this.Activate();
-        }
-
+        
+        #region Notification
         private void MainForm_Load(object sender, EventArgs e)
         {
             notif.Icon = new System.Drawing.Icon(Directory.GetCurrentDirectory() + @"\sync.ico");
             notif.Text = "Webszinkron";
             notif.Visible = true;
-
+            notif.DoubleClick += new EventHandler(this.notif_DoubleClick);
             ShowNotif("A program elindult!", "A szinkron fut!", ToolTipIcon.Info);
         }
         private void ShowNotif(string title, string text, ToolTipIcon icon)
@@ -110,5 +104,12 @@ namespace Webszinkron
             this.WindowState = FormWindowState.Normal;
             this.Activate();
         }
+        private void notif_DoubleClick(object Sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Minimized)
+                this.WindowState = FormWindowState.Normal;
+            this.Activate();
+        }
+        #endregion
     }
 }
