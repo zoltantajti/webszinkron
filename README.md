@@ -1,5 +1,5 @@
 <h1>Webszinkron</h1>
-<h3><center>a Yoomla VirueMart és a NaturaSoft számlázó között</center></h3>
+<h3><center>a Joomla VirueMart és a NaturaSoft számlázó között</center></h3>
 
 <hr />
 <h3>2019.03.09. 00:47 -> Kódfeltöltés</h3>
