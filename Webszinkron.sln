@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "Database\Databa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crypting", "Crypting\Crypting.csproj", "{32227C43-5B1A-4FE7-B981-034F5D9678C7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configuration", "Configuration\Configuration.csproj", "{2D85953F-369D-4872-AC92-A5A92450F46E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EHandler", "EHandler\EHandler.csproj", "{2D94EC09-2860-4CBA-B9AF-804DC6B54828}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{32227C43-5B1A-4FE7-B981-034F5D9678C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32227C43-5B1A-4FE7-B981-034F5D9678C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32227C43-5B1A-4FE7-B981-034F5D9678C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D85953F-369D-4872-AC92-A5A92450F46E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D85953F-369D-4872-AC92-A5A92450F46E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D85953F-369D-4872-AC92-A5A92450F46E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D85953F-369D-4872-AC92-A5A92450F46E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D94EC09-2860-4CBA-B9AF-804DC6B54828}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D94EC09-2860-4CBA-B9AF-804DC6B54828}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D94EC09-2860-4CBA-B9AF-804DC6B54828}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D94EC09-2860-4CBA-B9AF-804DC6B54828}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

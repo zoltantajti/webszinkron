@@ -2,6 +2,9 @@
 using System.IO;
 using System.Windows.Forms;
 using Crypting;
+using Configuration;
+using Database;
+using System.Drawing;
 
 namespace Webszinkron
 {
@@ -9,6 +12,8 @@ namespace Webszinkron
     {
         #region deklarációk
         private License lic;
+        public Cfg cfg;
+        public Db db;
         
         public string lic_name;
         public string lic_mail;
@@ -43,7 +48,11 @@ namespace Webszinkron
             }
             #endregion
 
-            
+            cfg = new Cfg();
+            db = new Db();
+            t_sync.Start();
+            updateTimerInterval();
+            rtb_log.ReadOnly = true;
         }
 
         #region License publikussá tétele
@@ -64,6 +73,7 @@ namespace Webszinkron
         #region ExitFunctions
         public void close()
         {
+            ShowNotif("Webszinkron", "A program most kilép!\r\nA szinkronizálás leáll...", ToolTipIcon.Warning);
             Application.Exit();
             Application.ExitThread();
         }
@@ -88,17 +98,21 @@ namespace Webszinkron
             notif.Text = "Webszinkron";
             notif.Visible = true;
             notif.DoubleClick += new EventHandler(this.notif_DoubleClick);
-            ShowNotif("A program elindult!", "A szinkron fut!", ToolTipIcon.Info);
+            
+            
         }
         private void ShowNotif(string title, string text, ToolTipIcon icon)
         {
             notif.BalloonTipIcon = icon;
             notif.BalloonTipText = text;
             notif.BalloonTipTitle = title;
-            notif.ContextMenuStrip = contextMS;
+            notif.ContextMenuStrip = notif_CMS;
             notif.ShowBalloonTip(1000);
         }
-
+        public void MakeNotif(string title, string text, ToolTipIcon icon)
+        {
+            ShowNotif(title, text, icon);
+        }
         private void showProgram_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Normal;
@@ -110,6 +124,56 @@ namespace Webszinkron
                 this.WindowState = FormWindowState.Normal;
             this.Activate();
         }
+        private void kilépésToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            close();
+        }
         #endregion
+
+        #region WriteDisplayLog
+        private void writeLog(string text, int type = 0)
+        {
+            rtb_log.Text += text + Environment.NewLine;
+            rtb_log.ScrollToCaret();
+            if (type == 0)
+            { //Default log
+                rtb_log.Find(text);
+                rtb_log.SelectionColor = Color.Black;
+                rtb_log.Select(rtb_log.Text.Length - 1, 0);
+            }else if(type == 1)
+            { //warning log
+                rtb_log.Find(text);
+                rtb_log.SelectionColor = Color.DarkOrange;
+                rtb_log.Select(rtb_log.Text.Length - 1, 0);
+            }
+            else if (type == 2)
+            { //error log
+                rtb_log.Find(text);
+                rtb_log.SelectionColor = Color.Red;
+                rtb_log.Select(rtb_log.Text.Length - 1, 0);
+            }
+        }
+        #endregion
+
+        #region timerSync
+        public void updateTimerInterval()
+        {
+            MessageBox.Show(cfg.getCfg("interval"));
+            t_sync.Interval = int.Parse(cfg.getCfg("interval"));
+        }
+        private void t_sync_Tick(object sender, EventArgs e)
+        {
+            writeLog("Szinkronizálás...", 0);
+        }
+        #endregion
+
+        #region navbar
+        private void beállításokToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Settings settings = new Settings(this);
+            settings.ShowDialog();
+        }
+        #endregion
+
     }
 }

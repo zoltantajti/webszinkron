@@ -38,11 +38,21 @@
             this.footStrip = new System.Windows.Forms.StatusStrip();
             this.tlbl_license = new System.Windows.Forms.ToolStripStatusLabel();
             this.notif = new System.Windows.Forms.NotifyIcon(this.components);
-            this.contextMS = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.notif_CMS = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.kilépésToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.rtb_log = new System.Windows.Forms.RichTextBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.t_sync = new System.Windows.Forms.Timer(this.components);
             this.showProgram = new System.Windows.Forms.ToolStripMenuItem();
             this.headMenu.SuspendLayout();
             this.footStrip.SuspendLayout();
-            this.contextMS.SuspendLayout();
+            this.notif_CMS.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // headMenu
@@ -53,7 +63,7 @@
             this.súgóToolStripMenuItem});
             this.headMenu.Location = new System.Drawing.Point(0, 0);
             this.headMenu.Name = "headMenu";
-            this.headMenu.Size = new System.Drawing.Size(1239, 24);
+            this.headMenu.Size = new System.Drawing.Size(802, 24);
             this.headMenu.TabIndex = 0;
             this.headMenu.Text = "HeadMenu";
             // 
@@ -68,7 +78,7 @@
             // kilépésToolStripMenuItem
             // 
             this.kilépésToolStripMenuItem.Name = "kilépésToolStripMenuItem";
-            this.kilépésToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.kilépésToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
             this.kilépésToolStripMenuItem.Text = "Kilépés";
             this.kilépésToolStripMenuItem.Click += new System.EventHandler(this.kilépésToolStripMenuItem_Click);
             // 
@@ -77,6 +87,7 @@
             this.beállításokToolStripMenuItem1.Name = "beállításokToolStripMenuItem1";
             this.beállításokToolStripMenuItem1.Size = new System.Drawing.Size(75, 20);
             this.beállításokToolStripMenuItem1.Text = "Beállítások";
+            this.beállításokToolStripMenuItem1.Click += new System.EventHandler(this.beállításokToolStripMenuItem1_Click);
             // 
             // súgóToolStripMenuItem
             // 
@@ -88,9 +99,9 @@
             // 
             this.footStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tlbl_license});
-            this.footStrip.Location = new System.Drawing.Point(0, 643);
+            this.footStrip.Location = new System.Drawing.Point(0, 352);
             this.footStrip.Name = "footStrip";
-            this.footStrip.Size = new System.Drawing.Size(1239, 22);
+            this.footStrip.Size = new System.Drawing.Size(802, 22);
             this.footStrip.TabIndex = 1;
             this.footStrip.Text = "statusStrip1";
             // 
@@ -105,19 +116,84 @@
             this.notif.Text = "notifyIcon1";
             this.notif.Visible = true;
             // 
-            // contextMS
+            // notif_CMS
             // 
-            this.contextMS.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.showProgram});
-            this.contextMS.Name = "contextMS";
-            this.contextMS.Size = new System.Drawing.Size(181, 48);
+            this.notif_CMS.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.showProgram,
+            this.kilépésToolStripMenuItem1});
+            this.notif_CMS.Name = "notif_CMS";
+            this.notif_CMS.Size = new System.Drawing.Size(151, 48);
+            // 
+            // kilépésToolStripMenuItem1
+            // 
+            this.kilépésToolStripMenuItem1.Name = "kilépésToolStripMenuItem1";
+            this.kilépésToolStripMenuItem1.Size = new System.Drawing.Size(150, 22);
+            this.kilépésToolStripMenuItem1.Text = "Kilépés";
+            this.kilépésToolStripMenuItem1.Click += new System.EventHandler(this.kilépésToolStripMenuItem1_Click);
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 110F));
+            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.panel2, 1, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 24);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(802, 328);
+            this.tableLayoutPanel1.TabIndex = 2;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.rtb_log);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(686, 322);
+            this.panel1.TabIndex = 0;
+            // 
+            // rtb_log
+            // 
+            this.rtb_log.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtb_log.Location = new System.Drawing.Point(0, 0);
+            this.rtb_log.Name = "rtb_log";
+            this.rtb_log.Size = new System.Drawing.Size(686, 322);
+            this.rtb_log.TabIndex = 0;
+            this.rtb_log.Text = "";
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.button1);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(695, 3);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(104, 322);
+            this.panel2.TabIndex = 1;
+            // 
+            // button1
+            // 
+            this.button1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.button1.Location = new System.Drawing.Point(0, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(104, 55);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "Szinkronizálás most";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // t_sync
+            // 
+            this.t_sync.Tick += new System.EventHandler(this.t_sync_Tick);
             // 
             // showProgram
             // 
-            this.showProgram.Image = global::Webszinkron.Properties.Resources.sync;
+            this.showProgram.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.showProgram.Image = ((System.Drawing.Image)(resources.GetObject("showProgram.Image")));
             this.showProgram.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.showProgram.Name = "showProgram";
-            this.showProgram.Size = new System.Drawing.Size(180, 22);
+            this.showProgram.Size = new System.Drawing.Size(150, 22);
             this.showProgram.Text = "Előtérbe hozás";
             this.showProgram.Click += new System.EventHandler(this.showProgram_Click);
             // 
@@ -125,7 +201,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1239, 665);
+            this.ClientSize = new System.Drawing.Size(802, 374);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.headMenu);
             this.Controls.Add(this.footStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -138,7 +215,10 @@
             this.headMenu.PerformLayout();
             this.footStrip.ResumeLayout(false);
             this.footStrip.PerformLayout();
-            this.contextMS.ResumeLayout(false);
+            this.notif_CMS.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -154,8 +234,15 @@
         private System.Windows.Forms.ToolStripMenuItem beállításokToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem súgóToolStripMenuItem;
         private System.Windows.Forms.NotifyIcon notif;
-        private System.Windows.Forms.ContextMenuStrip contextMS;
+        private System.Windows.Forms.ContextMenuStrip notif_CMS;
         private System.Windows.Forms.ToolStripMenuItem showProgram;
+        private System.Windows.Forms.ToolStripMenuItem kilépésToolStripMenuItem1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button button1;
+        public System.Windows.Forms.RichTextBox rtb_log;
+        public System.Windows.Forms.Timer t_sync;
     }
 }
 

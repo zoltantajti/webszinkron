@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Webszinkron.Properties {
+namespace Database.Properties {
     using System;
     
     
