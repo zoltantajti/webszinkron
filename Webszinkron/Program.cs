@@ -20,7 +20,7 @@ namespace Webszinkron
             {
                 Application.Run(new MainForm());
             }
-            catch (Exception e) { };
+            catch (Exception e) {};
         }
     }
 }
