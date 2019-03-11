@@ -48,15 +48,10 @@
             this.tp_mysql = new System.Windows.Forms.TabPage();
             this.tb_mysql_host = new System.Windows.Forms.TextBox();
             this.tc_settings = new System.Windows.Forms.TabControl();
-            this.tp_mssql = new System.Windows.Forms.TabPage();
             this.ofd_mssql = new System.Windows.Forms.OpenFileDialog();
-            this.label8 = new System.Windows.Forms.Label();
-            this.tb_mssql_path = new System.Windows.Forms.TextBox();
-            this.btn_mssql_browse = new System.Windows.Forms.Button();
             this.tp_sync.SuspendLayout();
             this.tp_mysql.SuspendLayout();
             this.tc_settings.SuspendLayout();
-            this.tp_mssql.SuspendLayout();
             this.SuspendLayout();
             // 
             // btn_set_save
@@ -231,7 +226,6 @@
             // tc_settings
             // 
             this.tc_settings.Controls.Add(this.tp_mysql);
-            this.tc_settings.Controls.Add(this.tp_mssql);
             this.tc_settings.Controls.Add(this.tp_sync);
             this.tc_settings.Location = new System.Drawing.Point(1, 11);
             this.tc_settings.Name = "tc_settings";
@@ -239,49 +233,11 @@
             this.tc_settings.Size = new System.Drawing.Size(799, 403);
             this.tc_settings.TabIndex = 3;
             // 
-            // tp_mssql
-            // 
-            this.tp_mssql.Controls.Add(this.btn_mssql_browse);
-            this.tp_mssql.Controls.Add(this.tb_mssql_path);
-            this.tp_mssql.Controls.Add(this.label8);
-            this.tp_mssql.Location = new System.Drawing.Point(4, 22);
-            this.tp_mssql.Name = "tp_mssql";
-            this.tp_mssql.Size = new System.Drawing.Size(791, 377);
-            this.tp_mssql.TabIndex = 2;
-            this.tp_mssql.Text = "MSSQL Adatbázis";
-            this.tp_mssql.UseVisualStyleBackColor = true;
-            // 
             // ofd_mssql
             // 
             this.ofd_mssql.DefaultExt = "mdf";
             this.ofd_mssql.Filter = "\"mdf files (*.mdf)|*.mdf\"";
             this.ofd_mssql.InitialDirectory = "C:\\";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(10, 10);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(112, 13);
-            this.label8.TabIndex = 0;
-            this.label8.Text = "MSSQL Adatbázis file:";
-            // 
-            // tb_mssql_path
-            // 
-            this.tb_mssql_path.Location = new System.Drawing.Point(128, 7);
-            this.tb_mssql_path.Name = "tb_mssql_path";
-            this.tb_mssql_path.Size = new System.Drawing.Size(574, 20);
-            this.tb_mssql_path.TabIndex = 1;
-            // 
-            // btn_mssql_browse
-            // 
-            this.btn_mssql_browse.Location = new System.Drawing.Point(708, 5);
-            this.btn_mssql_browse.Name = "btn_mssql_browse";
-            this.btn_mssql_browse.Size = new System.Drawing.Size(75, 23);
-            this.btn_mssql_browse.TabIndex = 2;
-            this.btn_mssql_browse.Text = "Tallózás";
-            this.btn_mssql_browse.UseVisualStyleBackColor = true;
-            this.btn_mssql_browse.Click += new System.EventHandler(this.btn_mssql_browse_Click);
             // 
             // Settings
             // 
@@ -304,8 +260,6 @@
             this.tp_mysql.ResumeLayout(false);
             this.tp_mysql.PerformLayout();
             this.tc_settings.ResumeLayout(false);
-            this.tp_mssql.ResumeLayout(false);
-            this.tp_mssql.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -331,10 +285,6 @@
         private System.Windows.Forms.TextBox tb_mysql_host;
         private System.Windows.Forms.TabControl tc_settings;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TabPage tp_mssql;
         private System.Windows.Forms.OpenFileDialog ofd_mssql;
-        private System.Windows.Forms.Button btn_mssql_browse;
-        private System.Windows.Forms.TextBox tb_mssql_path;
-        private System.Windows.Forms.Label label8;
     }
 }

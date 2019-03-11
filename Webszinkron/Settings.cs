@@ -33,9 +33,6 @@ namespace Webszinkron
             tb_mysql_pass.Text = cfg.getCfg("sqlpass");
             tb_mysql_dbname.Text = cfg.getCfg("sqldb");
             tb_timer.Text = (int.Parse(cfg.getCfg("interval")) / 1000).ToString();
-            string mssqlFile = cfg.getCfg("mssqlfile");
-            tb_mssql_path.Text = mssqlFile;
-            ofd_mssql.InitialDirectory = Path.GetDirectoryName(mssqlFile);
         }
 
         private void Settings_FormClosing(object sender, FormClosingEventArgs e)

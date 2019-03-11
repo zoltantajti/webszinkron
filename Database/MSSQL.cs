@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Windows.Forms;
 using Configuration;
 namespace Database
@@ -14,7 +15,7 @@ namespace Database
             cfg = new Cfg();
             file = cfg.getCfg("mssqlfile");
             conn = new SqlConnection();
-            string cs = @"Data Source=(local)\NATURASOFT;Database=ns_ftszamla_PrbaSQL;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            string cs = @"Data Source=(local)\NATURASOFT;Database=ns_szamlapro_WebshopKft;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
             conn.ConnectionString = cs;
         }
         private bool OpenConnection()
@@ -37,6 +38,7 @@ namespace Database
                 return true;
             }catch(SqlException ex)
             {
+                MessageBox.Show(ex.Message);
                 return false;
             }
         }
@@ -65,10 +67,22 @@ namespace Database
                 return resp;
             }
         }
+        public int LastIndex(string tabla, string mit = "ID", string cond = "")
+        {
+            string qry = "SELECT max(" + mit + ") FROM " + tabla;
+            if(this.OpenConnection() == true)
+            {
+                SqlCommand cmd = new SqlCommand(qry, conn);
+                int last = (int)cmd.ExecuteScalar();
+                this.CloseConnection();
+                return last;
+            }
+            return 0;
+        }
+
         public void Insert(string tabla, string fields, string values)
         {
             string query = "INSERT INTO " + tabla + " (" + fields + ") VALUES (" + values + ")";
-            MessageBox.Show(query);
             if(this.OpenConnection() == true)
             {
                 try

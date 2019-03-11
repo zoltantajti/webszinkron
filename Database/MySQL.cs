@@ -105,6 +105,7 @@ namespace Database
                 return true;
             }catch(MySqlException ex)
             {
+                MessageBox.Show(ex.Message);
                 return false;
             }
         }
@@ -184,17 +185,52 @@ namespace Database
             DataTable ret = new DataTable();
             if(this.OpenConnection() == true)
             {
-                MySqlCommand cmd = new MySqlCommand(query, conn);
-                cmd.ExecuteNonQuery();
-                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                da.Fill(ret);
-                this.CloseConnection();
-                return ret;
+                try
+                {
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+                    cmd.ExecuteNonQuery();
+                    MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                    da.Fill(ret);
+                    this.CloseConnection();
+                    return ret;
+                }catch(MySqlException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return ret;
+                }
             }
             else
             {
                 return ret;
             }
+        }
+
+        public DataTable QSelect(string qry)
+        {
+            DataTable ret = new DataTable();
+            try
+            {
+                if (this.OpenConnection() == true)
+                {
+                    MySqlCommand cmd = new MySqlCommand(qry, conn);
+                    cmd.ExecuteNonQuery();
+                    MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                    da.Fill(ret);
+                    this.CloseConnection();
+                    return ret;
+
+                }
+                else
+                {
+                    MessageBox.Show("Nincs kapcsolódva");
+                    return ret;
+                }
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+                return ret;
+            };
         }
     }
 }
