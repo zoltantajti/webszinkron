@@ -28,7 +28,7 @@ namespace WebSync
                 ld = new LocalDate();
                 string syncStart = ld.getLocalTime();
                 string q = "SELECT ot.virtuemart_order_id as orderid, ot.order_number as ident, ot.order_total as brutto, ot.order_salesPrice as netto, ot.order_billTaxAmount as afa, " +
-                    "ut.last_name as keresztnev, ut.first_name as vezeteknev, ut.address_1 as cim, ut.address_2 as cim2, ut.city as varos, ut.zip as irsz FROM " +
+                    "ot.virtuemart_paymentmethod_id as payID, ut.last_name as keresztnev, ut.first_name as vezeteknev, ut.address_1 as cim, ut.address_2 as cim2, ut.city as varos, ut.zip as irsz FROM " +
                     "qz3vf_virtuemart_orders as ot LEFT JOIN qz3vf_virtuemart_order_userinfos as ut ON(ut.virtuemart_order_id = ot.virtuemart_order_id) WHERE ot.synced = 0";
                 DataTable get = mysql.QSelect(q);
                 int rowsCount = get.Rows.Count;
@@ -41,7 +41,7 @@ namespace WebSync
                     mssql.Insert("SZAMLA", szamla_fields, szamla_vals);
                     int lastID = mssql.LastIndex("SZAMLA");
                     //Számlatételek lehívása
-                    string fields = "order_item_name, product_quantity, product_priceWithoutTax, product_basePriceWithTax, product_tax";
+                    string fields = "order_item_name, order_item_sku, product_quantity, product_priceWithoutTax, product_basePriceWithTax, product_tax";
                     string iq = "SELECT " + fields + " FROM `qz3vf_virtuemart_order_items` WHERE virtuemart_order_id = " + orderID + "";
                     DataTable items = mysql.QSelect(iq);
 
@@ -51,7 +51,6 @@ namespace WebSync
                         DataRow item = items.Rows[j];
                         string item_fields = this.getTetelFields();
                         string item_values = this.getTetelValue(lastID.ToString(), item);
-                        MessageBox.Show(item_values);
                         mssql.Insert("SZAMLATETEL", item_fields, item_values);
                     }
                     mysql.Update("qz3vf_virtuemart_orders", "synced = 1", "WHERE virtuemart_order_id = " + orderID + "");
@@ -122,7 +121,15 @@ namespace WebSync
         }
         private string getSzamlaValues(DataRow row)
         {
-            //vals.length = 38;
+            string payment;
+            string payID;
+            switch (row["payID"])
+            {
+                case "1": default: payment = "Utánvét"; payID = "3"; break;
+                case "2": payment = "Átutalás"; payID = "2"; break;
+                case "3": payment = "Bankkártya"; payID = "4"; break;
+            }
+            
             string vals = "'FELRE_" + row["ident"] + "'," +
                 "" + ld.getLocalYear().Replace(".",string.Empty) + "," +
                 "0," +
@@ -131,8 +138,8 @@ namespace WebSync
                 "0," +
                 "'" + row["vezeteknev"] + " " + row["keresztnev"] + "'," +
                 "'" + row["irsz"] + " " + row["varos"] + ", " + row["cim"] + " " + row["cim2"] + "'," +
-                "2," +
-                "'átutalás'," +
+                "" + payID + "," +
+                "'" + payment + "'," +
 
                 "'" + ld.getSqlDateTime() + "'," +
                 "'" + ld.getSqlDateTime() + "'," +
@@ -202,7 +209,7 @@ namespace WebSync
                 "0," +
                 "'" + item["order_item_name"] + "'," +
                 "''," +
-                "''," +
+                "'" + item["order_item_sku"] + "'," +
                 "''," +
                 "'db'," +
                 "" + double.Parse(item["product_quantity"].ToString()) + "," +
