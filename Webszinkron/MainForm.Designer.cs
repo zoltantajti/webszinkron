@@ -47,6 +47,8 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.btn_Sync = new System.Windows.Forms.Button();
             this.t_sync = new System.Windows.Forms.Timer(this.components);
+            this.lb_nextSync = new System.Windows.Forms.ToolStripStatusLabel();
+            this.t_countdown = new System.Windows.Forms.Timer(this.components);
             this.headMenu.SuspendLayout();
             this.footStrip.SuspendLayout();
             this.notif_CMS.SuspendLayout();
@@ -98,7 +100,8 @@
             // footStrip
             // 
             this.footStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tlbl_license});
+            this.tlbl_license,
+            this.lb_nextSync});
             this.footStrip.Location = new System.Drawing.Point(0, 352);
             this.footStrip.Name = "footStrip";
             this.footStrip.Size = new System.Drawing.Size(802, 22);
@@ -198,6 +201,19 @@
             // 
             this.t_sync.Tick += new System.EventHandler(this.t_sync_Tick);
             // 
+            // lb_nextSync
+            // 
+            this.lb_nextSync.Name = "lb_nextSync";
+            this.lb_nextSync.Size = new System.Drawing.Size(638, 17);
+            this.lb_nextSync.Spring = true;
+            this.lb_nextSync.Text = "toolStripStatusLabel1";
+            this.lb_nextSync.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // t_countdown
+            // 
+            this.t_countdown.Interval = 1000;
+            this.t_countdown.Tick += new System.EventHandler(this.t_countdown_Tick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -244,6 +260,8 @@
         private System.Windows.Forms.Button btn_Sync;
         public System.Windows.Forms.RichTextBox rtb_log;
         public System.Windows.Forms.Timer t_sync;
+        private System.Windows.Forms.ToolStripStatusLabel lb_nextSync;
+        private System.Windows.Forms.Timer t_countdown;
     }
 }
 

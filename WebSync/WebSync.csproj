@@ -54,6 +54,10 @@
       <Project>{7647cc87-5adc-4e9b-85d0-81b49e61cc47}</Project>
       <Name>Datum</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EHandler\EHandler.csproj">
+      <Project>{2d94ec09-2860-4cba-b9af-804dc6b54828}</Project>
+      <Name>EHandler</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -9,12 +9,14 @@ using Configuration;
 using Database;
 using Datum;
 using WebSync;
+using EHandler;
 
 namespace Webszinkron
 {
     public partial class MainForm : Form
     {
         #region deklarációk
+        public Handler handler;
         private License lic;
         public Cfg cfg;
         public MySQL mysql;
@@ -60,9 +62,13 @@ namespace Webszinkron
             mssql = new MSSQL();
             local = new LocalDate();
             wsync = new WSync();
+            handler = new Handler();
+
+
 
             Sync(); //Program indításkor automatikusan szinkronizál!
             t_sync.Start();
+            t_countdown.Start();
             updateTimerInterval();
             rtb_log.ReadOnly = true;
         }
@@ -111,19 +117,19 @@ namespace Webszinkron
         #region Notification
         private void MainForm_Load(object sender, EventArgs e)
         {
-            notif.Icon = new System.Drawing.Icon(Directory.GetCurrentDirectory() + @"\sync.ico");
+            notif.Icon = new Icon(Directory.GetCurrentDirectory() + @"\sync.ico");
             notif.Text = "Webszinkron";
             notif.Visible = true;
+            notif.ContextMenuStrip = notif_CMS;
             notif.DoubleClick += new EventHandler(this.notif_DoubleClick);
-            
-            
+            ShowNotif("A program elindult", "Szinkronizálás", ToolTipIcon.Info);
         }
         private void ShowNotif(string title, string text, ToolTipIcon icon)
         {
             notif.BalloonTipIcon = icon;
             notif.BalloonTipText = text;
             notif.BalloonTipTitle = title;
-            notif.ContextMenuStrip = notif_CMS;
+            
             notif.ShowBalloonTip(1000);
         }
         public void MakeNotif(string title, string text, ToolTipIcon icon)
@@ -173,13 +179,26 @@ namespace Webszinkron
         #endregion
 
         #region timerSync
+        public int interv;
+        public int _interv;
         public void updateTimerInterval(int _int = 0)
         {
             int interval;
             if (_int == 0) { interval = int.Parse(cfg.getCfg("interval")); } else { interval = _int; }
+            interv = (interval / 1000);
+            _interv = (interval / 1000);
             t_sync.Interval = interval;
+
+            lb_nextSync.Text = "A következő szinkronizálás: " + interv.ToString() + " másodperc";
         }
-        
+        private void t_countdown_Tick(object sender, EventArgs e)
+        {
+            if(interv == 0){ interv = _interv; }else interv = interv - 1;
+
+            lb_nextSync.Text = "A következő szinkronizálás: " + interv.ToString() + " másodperc";
+
+            
+        }
         private void t_sync_Tick(object sender, EventArgs e)
         {
             Sync();
@@ -197,10 +216,9 @@ namespace Webszinkron
         #region Sync functions
         private void Sync()
         {
-            /*string time = local.getLocalTime();
-            writeLog(time + " > Szinkronizálás...", 0);*/
-            writeLog(wsync.Run(), 0);
+            writeLog(wsync.Run(notif), 0);
         }
+
         #endregion
 
         

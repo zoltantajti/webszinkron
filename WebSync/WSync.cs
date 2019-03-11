@@ -3,6 +3,7 @@
 */
 using Database;
 using Datum;
+using System;
 using System.Data;
 using System.Windows.Forms;
 
@@ -10,48 +11,65 @@ namespace WebSync
 {
     public class WSync
     {
+
         private MySQL mysql;
         private MSSQL mssql;
         private LocalDate ld;
 
         #region Szinkronizálás Webáruház -> Számlázó
-        public string Run()
+        public string Run(NotifyIcon notif)
         {
-            mysql = new MySQL();
-            mysql.DBConnect();
-            mssql = new MSSQL();
-            ld = new LocalDate();
-            string syncStart = ld.getLocalTime();
-            string q = "SELECT ot.virtuemart_order_id as orderid, ot.order_number as ident, ot.order_total as brutto, ot.order_salesPrice as netto, ot.order_billTaxAmount as afa, " +
-                "ut.last_name as keresztnev, ut.first_name as vezeteknev, ut.address_1 as cim, ut.address_2 as cim2, ut.city as varos, ut.zip as irsz FROM " +
-                "qz3vf_virtuemart_orders as ot LEFT JOIN qz3vf_virtuemart_order_userinfos as ut ON(ut.virtuemart_order_id = ot.virtuemart_order_id) WHERE ot.synced = 0";
-            DataTable get = mysql.QSelect(q);
-            int rowsCount = get.Rows.Count;
-            for (int i = 0; i <= rowsCount - 1 ; i++)
+            string retString;
+            try
             {
-                string orderID = get.Rows[i]["orderid"].ToString();
-                //Számlatörzs beszúrása
-                string szamla_fields = this.getSzamlaFields();
-                string szamla_vals = this.getSzamlaValues(get.Rows[i]);
-                mssql.Insert("SZAMLA", szamla_fields, szamla_vals);
-                int lastID = mssql.LastIndex("SZAMLA");
-                //Számlatételek lehívása
-                string fields = "order_item_name, product_quantity, product_priceWithoutTax, product_basePriceWithTax, product_tax";
-                string iq = "SELECT " + fields + " FROM `qz3vf_virtuemart_order_items` WHERE virtuemart_order_id = " + orderID + "";
-                DataTable items = mysql.QSelect(iq);
-
-                int itemCount = items.Rows.Count;
-                for (int j = 0; j <= itemCount - 1; j++)
+                mysql = new MySQL();
+                mysql.DBConnect();
+                mssql = new MSSQL();
+                ld = new LocalDate();
+                string syncStart = ld.getLocalTime();
+                string q = "SELECT ot.virtuemart_order_id as orderid, ot.order_number as ident, ot.order_total as brutto, ot.order_salesPrice as netto, ot.order_billTaxAmount as afa, " +
+                    "ut.last_name as keresztnev, ut.first_name as vezeteknev, ut.address_1 as cim, ut.address_2 as cim2, ut.city as varos, ut.zip as irsz FROM " +
+                    "qz3vf_virtuemart_orders as ot LEFT JOIN qz3vf_virtuemart_order_userinfos as ut ON(ut.virtuemart_order_id = ot.virtuemart_order_id) WHERE ot.synced = 0";
+                DataTable get = mysql.QSelect(q);
+                int rowsCount = get.Rows.Count;
+                for (int i = 0; i <= rowsCount - 1; i++)
                 {
-                    DataRow item = items.Rows[j];
-                    string item_fields = this.getTetelFields();
-                    string item_values = this.getTetelValue(lastID.ToString(), item);
-                    MessageBox.Show(item_values);
-                    mssql.Insert("SZAMLATETEL", item_fields, item_values);
+                    string orderID = get.Rows[i]["orderid"].ToString();
+                    //Számlatörzs beszúrása
+                    string szamla_fields = this.getSzamlaFields();
+                    string szamla_vals = this.getSzamlaValues(get.Rows[i]);
+                    mssql.Insert("SZAMLA", szamla_fields, szamla_vals);
+                    int lastID = mssql.LastIndex("SZAMLA");
+                    //Számlatételek lehívása
+                    string fields = "order_item_name, product_quantity, product_priceWithoutTax, product_basePriceWithTax, product_tax";
+                    string iq = "SELECT " + fields + " FROM `qz3vf_virtuemart_order_items` WHERE virtuemart_order_id = " + orderID + "";
+                    DataTable items = mysql.QSelect(iq);
+
+                    int itemCount = items.Rows.Count;
+                    for (int j = 0; j <= itemCount - 1; j++)
+                    {
+                        DataRow item = items.Rows[j];
+                        string item_fields = this.getTetelFields();
+                        string item_values = this.getTetelValue(lastID.ToString(), item);
+                        MessageBox.Show(item_values);
+                        mssql.Insert("SZAMLATETEL", item_fields, item_values);
+                    }
+                    mysql.Update("qz3vf_virtuemart_orders", "synced = 1", "WHERE virtuemart_order_id = " + orderID + "");
                 }
-                mysql.Update("qz3vf_virtuemart_orders", "synced = 1", "WHERE virtuemart_order_id = " + orderID.ToString() + "");
+
+                retString = syncStart + " > Szinkronizálva " + rowsCount.ToString() + " db megrendelés!";
+                notif.BalloonTipIcon = ToolTipIcon.Info;
+
             }
-            return syncStart + " > Szinkronizálva " + rowsCount.ToString() + " db megrendelés!";
+            catch(Exception ex)
+            {
+                notif.BalloonTipIcon = ToolTipIcon.Error;
+                retString = ex.Message;
+            }
+
+            notif.BalloonTipText = retString;
+            notif.ShowBalloonTip(1000);
+            return retString;
         }
         #endregion
 

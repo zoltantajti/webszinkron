@@ -208,6 +208,10 @@
       <Project>{7647cc87-5adc-4e9b-85d0-81b49e61cc47}</Project>
       <Name>Datum</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EHandler\EHandler.csproj">
+      <Project>{2d94ec09-2860-4cba-b9af-804dc6b54828}</Project>
+      <Name>EHandler</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WebSync\WebSync.csproj">
       <Project>{2d76d9a1-04d1-4f88-bb77-3420b309dfa1}</Project>
       <Name>WebSync</Name>

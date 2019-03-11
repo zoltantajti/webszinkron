@@ -7,4 +7,4 @@ dbname=4_demo_netlord
 [mssql]
 mssqlfile=C:\Program Files (x86)\Microsoft SQL Server\MSSQL.1\MSSQL\Data\ns_ftszamla_PrbaSQL.mdf
 [sync]
-timer=10000
+timer=30000
