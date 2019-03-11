@@ -1,5 +1,9 @@
 ﻿using Configuration;
 using Database;
+using System.Data;
+using System.IO;
+using System.Security.AccessControl;
+using System.Security.Principal;
 using System.Windows.Forms;
 
 namespace Webszinkron
@@ -7,13 +11,15 @@ namespace Webszinkron
     public partial class Settings : Form
     {
         Cfg cfg;
-        Db db;
+        MySQL mysql;
+        MSSQL mssql;
         MainForm mf;
         public Settings(MainForm _mf)
         {
             InitializeComponent();
             cfg = new Cfg();
-            db = new Db();
+            mysql = new MySQL();
+            mssql = new MSSQL();
             mf = _mf;
             mf.t_sync.Stop();
             FillForms();
@@ -27,6 +33,9 @@ namespace Webszinkron
             tb_mysql_pass.Text = cfg.getCfg("sqlpass");
             tb_mysql_dbname.Text = cfg.getCfg("sqldb");
             tb_timer.Text = (int.Parse(cfg.getCfg("interval")) / 1000).ToString();
+            string mssqlFile = cfg.getCfg("mssqlfile");
+            tb_mssql_path.Text = mssqlFile;
+            ofd_mssql.InitialDirectory = Path.GetDirectoryName(mssqlFile);
         }
 
         private void Settings_FormClosing(object sender, FormClosingEventArgs e)
@@ -36,7 +45,7 @@ namespace Webszinkron
 
         private void btn_set_sql_test_Click(object sender, System.EventArgs e)
         {
-            string testRes = db.TestConnection(tb_mysql_host.Text, tb_mysql_dbname.Text, tb_mysql_user.Text, tb_mysql_pass.Text);
+            string testRes = mysql.TestConnection(tb_mysql_host.Text, tb_mysql_dbname.Text, tb_mysql_user.Text, tb_mysql_pass.Text);
             MessageBox.Show(testRes);
         }
 
@@ -64,9 +73,32 @@ namespace Webszinkron
 
             cfg.writeCfg(file);
             cfg.readCfg();
-            mf.updateTimerInterval();
+            mf.updateTimerInterval(int.Parse(timer_interval));
+
             MessageBox.Show("A beállítások mentve!", "Beállítások", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.Close();
+        }
+
+        private void btn_mssql_browse_Click(object sender, System.EventArgs e)
+        {
+            this.GrantAccess(ofd_mssql.InitialDirectory);
+            ofd_mssql.Filter = "Adatbázis file (*.mdf)|*.mdf";
+            ofd_mssql.ShowDialog();
+            
+        }
+
+        private bool GrantAccess(string path)
+        {
+            DirectoryInfo dInfo = new DirectoryInfo(path);
+            DirectorySecurity dSec = dInfo.GetAccessControl();
+            dSec.AddAccessRule(new FileSystemAccessRule(
+                new SecurityIdentifier(WellKnownSidType.WorldSid, null),
+                FileSystemRights.FullControl,
+                InheritanceFlags.ObjectInherit | InheritanceFlags.ContainerInherit,
+                PropagationFlags.NoPropagateInherit,
+                AccessControlType.Allow));
+            dInfo.SetAccessControl(dSec);
+            return true;
         }
     }
 }

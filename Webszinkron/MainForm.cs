@@ -1,10 +1,14 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Forms;
+using System.Drawing;
+using System.Data;
+
 using Crypting;
 using Configuration;
 using Database;
-using System.Drawing;
+using Datum;
+using WebSync;
 
 namespace Webszinkron
 {
@@ -13,7 +17,10 @@ namespace Webszinkron
         #region deklarációk
         private License lic;
         public Cfg cfg;
-        public Db db;
+        public MySQL mysql;
+        public MSSQL mssql;
+        public LocalDate local;
+        public WSync wsync;
         
         public string lic_name;
         public string lic_mail;
@@ -49,10 +56,20 @@ namespace Webszinkron
             #endregion
 
             cfg = new Cfg();
-            db = new Db();
+            mysql = new MySQL();
+            mssql = new MSSQL();
+            local = new LocalDate();
+            wsync = new WSync();
+
+            Sync(); //Program indításkor automatikusan szinkronizál!
             t_sync.Start();
             updateTimerInterval();
             rtb_log.ReadOnly = true;
+        }
+
+        private void btn_Sync_Click(object sender, EventArgs e)
+        {
+            Sync();
         }
 
         #region License publikussá tétele
@@ -156,14 +173,16 @@ namespace Webszinkron
         #endregion
 
         #region timerSync
-        public void updateTimerInterval()
+        public void updateTimerInterval(int _int = 0)
         {
-            MessageBox.Show(cfg.getCfg("interval"));
-            t_sync.Interval = int.Parse(cfg.getCfg("interval"));
+            int interval;
+            if (_int == 0) { interval = int.Parse(cfg.getCfg("interval")); } else { interval = _int; }
+            t_sync.Interval = interval;
         }
+        
         private void t_sync_Tick(object sender, EventArgs e)
         {
-            writeLog("Szinkronizálás...", 0);
+            Sync();
         }
         #endregion
 
@@ -175,5 +194,15 @@ namespace Webszinkron
         }
         #endregion
 
+        #region Sync functions
+        private void Sync()
+        {
+            /*string time = local.getLocalTime();
+            writeLog(time + " > Szinkronizálás...", 0);*/
+            writeLog(wsync.Run(), 0);
+        }
+        #endregion
+
+        
     }
 }

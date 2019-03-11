@@ -11,7 +11,7 @@ namespace Database
     {
         void SendMessage(string msg, string title);
     }
-    public class Db
+    public class MySQL
     {
         private Cfg cfg;
         private MySqlConnection conn;

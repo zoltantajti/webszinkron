@@ -39,14 +39,14 @@
             this.tlbl_license = new System.Windows.Forms.ToolStripStatusLabel();
             this.notif = new System.Windows.Forms.NotifyIcon(this.components);
             this.notif_CMS = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.showProgram = new System.Windows.Forms.ToolStripMenuItem();
             this.kilépésToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.rtb_log = new System.Windows.Forms.RichTextBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btn_Sync = new System.Windows.Forms.Button();
             this.t_sync = new System.Windows.Forms.Timer(this.components);
-            this.showProgram = new System.Windows.Forms.ToolStripMenuItem();
             this.headMenu.SuspendLayout();
             this.footStrip.SuspendLayout();
             this.notif_CMS.SuspendLayout();
@@ -124,6 +124,16 @@
             this.notif_CMS.Name = "notif_CMS";
             this.notif_CMS.Size = new System.Drawing.Size(151, 48);
             // 
+            // showProgram
+            // 
+            this.showProgram.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.showProgram.Image = ((System.Drawing.Image)(resources.GetObject("showProgram.Image")));
+            this.showProgram.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.showProgram.Name = "showProgram";
+            this.showProgram.Size = new System.Drawing.Size(150, 22);
+            this.showProgram.Text = "Előtérbe hozás";
+            this.showProgram.Click += new System.EventHandler(this.showProgram_Click);
+            // 
             // kilépésToolStripMenuItem1
             // 
             this.kilépésToolStripMenuItem1.Name = "kilépésToolStripMenuItem1";
@@ -166,36 +176,27 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.button1);
+            this.panel2.Controls.Add(this.btn_Sync);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(695, 3);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(104, 322);
             this.panel2.TabIndex = 1;
             // 
-            // button1
+            // btn_Sync
             // 
-            this.button1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button1.Location = new System.Drawing.Point(0, 0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(104, 55);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Szinkronizálás most";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btn_Sync.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btn_Sync.Location = new System.Drawing.Point(0, 0);
+            this.btn_Sync.Name = "btn_Sync";
+            this.btn_Sync.Size = new System.Drawing.Size(104, 55);
+            this.btn_Sync.TabIndex = 0;
+            this.btn_Sync.Text = "Szinkronizálás most";
+            this.btn_Sync.UseVisualStyleBackColor = true;
+            this.btn_Sync.Click += new System.EventHandler(this.btn_Sync_Click);
             // 
             // t_sync
             // 
             this.t_sync.Tick += new System.EventHandler(this.t_sync_Tick);
-            // 
-            // showProgram
-            // 
-            this.showProgram.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.showProgram.Image = ((System.Drawing.Image)(resources.GetObject("showProgram.Image")));
-            this.showProgram.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.showProgram.Name = "showProgram";
-            this.showProgram.Size = new System.Drawing.Size(150, 22);
-            this.showProgram.Text = "Előtérbe hozás";
-            this.showProgram.Click += new System.EventHandler(this.showProgram_Click);
             // 
             // MainForm
             // 
@@ -240,7 +241,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_Sync;
         public System.Windows.Forms.RichTextBox rtb_log;
         public System.Windows.Forms.Timer t_sync;
     }

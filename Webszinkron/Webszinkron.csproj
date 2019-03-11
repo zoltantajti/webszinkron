@@ -61,7 +61,7 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>CB900DA7163EA65E123F866AE4F4F52667FBB1A4</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>896C9C57EA388D5DB7645434BF632F7A51353993</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
@@ -108,6 +108,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -147,6 +152,17 @@
     <EmbeddedResource Include="Settings.resx">
       <DependentUpon>Settings.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="DataSet1.xsc">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="DataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataSet1.xss">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
@@ -158,8 +174,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Webszinkron_1_TemporaryKey.pfx" />
-    <None Include="Webszinkron_2_TemporaryKey.pfx" />
     <None Include="Webszinkron_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -190,9 +204,18 @@
       <Project>{8bb1055e-c9f5-4c3f-acbd-5fdf37ea93cf}</Project>
       <Name>Database</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Datum\Datum.csproj">
+      <Project>{7647cc87-5adc-4e9b-85d0-81b49e61cc47}</Project>
+      <Name>Datum</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebSync\WebSync.csproj">
+      <Project>{2d76d9a1-04d1-4f88-bb77-3420b309dfa1}</Project>
+      <Name>WebSync</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\sync.png" />
+    <Content Include="config.inc" />
     <Content Include="sync.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
