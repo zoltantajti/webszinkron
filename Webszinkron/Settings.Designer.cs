@@ -49,9 +49,25 @@
             this.tb_mysql_host = new System.Windows.Forms.TextBox();
             this.tc_settings = new System.Windows.Forms.TabControl();
             this.ofd_mssql = new System.Windows.Forms.OpenFileDialog();
+            this.tp_mssql = new System.Windows.Forms.TabPage();
+            this.label8 = new System.Windows.Forms.Label();
+            this.cb_mssqls = new System.Windows.Forms.ComboBox();
+            this.tp_company = new System.Windows.Forms.TabPage();
+            this.label9 = new System.Windows.Forms.Label();
+            this.tb_cegnev = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.tb_asz1 = new System.Windows.Forms.TextBox();
+            this.tb_cim = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.tb_asz2 = new System.Windows.Forms.TextBox();
+            this.tb_asz3 = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.tp_sync.SuspendLayout();
             this.tp_mysql.SuspendLayout();
             this.tc_settings.SuspendLayout();
+            this.tp_mssql.SuspendLayout();
+            this.tp_company.SuspendLayout();
             this.SuspendLayout();
             // 
             // btn_set_save
@@ -226,7 +242,9 @@
             // tc_settings
             // 
             this.tc_settings.Controls.Add(this.tp_mysql);
+            this.tc_settings.Controls.Add(this.tp_mssql);
             this.tc_settings.Controls.Add(this.tp_sync);
+            this.tc_settings.Controls.Add(this.tp_company);
             this.tc_settings.Location = new System.Drawing.Point(1, 11);
             this.tc_settings.Name = "tc_settings";
             this.tc_settings.SelectedIndex = 0;
@@ -238,6 +256,139 @@
             this.ofd_mssql.DefaultExt = "mdf";
             this.ofd_mssql.Filter = "\"mdf files (*.mdf)|*.mdf\"";
             this.ofd_mssql.InitialDirectory = "C:\\";
+            // 
+            // tp_mssql
+            // 
+            this.tp_mssql.Controls.Add(this.cb_mssqls);
+            this.tp_mssql.Controls.Add(this.label8);
+            this.tp_mssql.Location = new System.Drawing.Point(4, 22);
+            this.tp_mssql.Name = "tp_mssql";
+            this.tp_mssql.Size = new System.Drawing.Size(791, 377);
+            this.tp_mssql.TabIndex = 2;
+            this.tp_mssql.Text = "MSSQL kiválasztása";
+            this.tp_mssql.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(7, 10);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(156, 13);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "MSSQL adatbázis kiválasztása:";
+            // 
+            // cb_mssqls
+            // 
+            this.cb_mssqls.FormattingEnabled = true;
+            this.cb_mssqls.Location = new System.Drawing.Point(169, 7);
+            this.cb_mssqls.Name = "cb_mssqls";
+            this.cb_mssqls.Size = new System.Drawing.Size(246, 21);
+            this.cb_mssqls.TabIndex = 1;
+            // 
+            // tp_company
+            // 
+            this.tp_company.Controls.Add(this.tb_asz3);
+            this.tp_company.Controls.Add(this.label13);
+            this.tp_company.Controls.Add(this.tb_asz2);
+            this.tp_company.Controls.Add(this.label12);
+            this.tp_company.Controls.Add(this.tb_cim);
+            this.tp_company.Controls.Add(this.tb_asz1);
+            this.tp_company.Controls.Add(this.label11);
+            this.tp_company.Controls.Add(this.label10);
+            this.tp_company.Controls.Add(this.tb_cegnev);
+            this.tp_company.Controls.Add(this.label9);
+            this.tp_company.Location = new System.Drawing.Point(4, 22);
+            this.tp_company.Name = "tp_company";
+            this.tp_company.Size = new System.Drawing.Size(791, 377);
+            this.tp_company.TabIndex = 3;
+            this.tp_company.Text = "Cégadatok";
+            this.tp_company.UseVisualStyleBackColor = true;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(7, 14);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(47, 13);
+            this.label9.TabIndex = 0;
+            this.label9.Text = "Cégnév:";
+            // 
+            // tb_cegnev
+            // 
+            this.tb_cegnev.Location = new System.Drawing.Point(81, 11);
+            this.tb_cegnev.Name = "tb_cegnev";
+            this.tb_cegnev.Size = new System.Drawing.Size(296, 20);
+            this.tb_cegnev.TabIndex = 1;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(7, 41);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(53, 13);
+            this.label10.TabIndex = 2;
+            this.label10.Text = "Adószám:";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(7, 67);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(29, 13);
+            this.label11.TabIndex = 3;
+            this.label11.Text = "Cím:";
+            // 
+            // tb_asz1
+            // 
+            this.tb_asz1.Location = new System.Drawing.Point(81, 37);
+            this.tb_asz1.MaxLength = 8;
+            this.tb_asz1.Name = "tb_asz1";
+            this.tb_asz1.Size = new System.Drawing.Size(62, 20);
+            this.tb_asz1.TabIndex = 4;
+            this.tb_asz1.Text = "12345678";
+            // 
+            // tb_cim
+            // 
+            this.tb_cim.Location = new System.Drawing.Point(81, 64);
+            this.tb_cim.Name = "tb_cim";
+            this.tb_cim.Size = new System.Drawing.Size(296, 20);
+            this.tb_cim.TabIndex = 5;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(149, 40);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(10, 13);
+            this.label12.TabIndex = 6;
+            this.label12.Text = "-";
+            // 
+            // tb_asz2
+            // 
+            this.tb_asz2.Location = new System.Drawing.Point(165, 37);
+            this.tb_asz2.MaxLength = 1;
+            this.tb_asz2.Name = "tb_asz2";
+            this.tb_asz2.Size = new System.Drawing.Size(15, 20);
+            this.tb_asz2.TabIndex = 7;
+            this.tb_asz2.Text = "1";
+            // 
+            // tb_asz3
+            // 
+            this.tb_asz3.Location = new System.Drawing.Point(200, 37);
+            this.tb_asz3.MaxLength = 2;
+            this.tb_asz3.Name = "tb_asz3";
+            this.tb_asz3.Size = new System.Drawing.Size(23, 20);
+            this.tb_asz3.TabIndex = 9;
+            this.tb_asz3.Text = "32";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(184, 40);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(10, 13);
+            this.label13.TabIndex = 8;
+            this.label13.Text = "-";
             // 
             // Settings
             // 
@@ -260,6 +411,10 @@
             this.tp_mysql.ResumeLayout(false);
             this.tp_mysql.PerformLayout();
             this.tc_settings.ResumeLayout(false);
+            this.tp_mssql.ResumeLayout(false);
+            this.tp_mssql.PerformLayout();
+            this.tp_company.ResumeLayout(false);
+            this.tp_company.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -286,5 +441,19 @@
         private System.Windows.Forms.TabControl tc_settings;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.OpenFileDialog ofd_mssql;
+        private System.Windows.Forms.TabPage tp_mssql;
+        private System.Windows.Forms.ComboBox cb_mssqls;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TabPage tp_company;
+        private System.Windows.Forms.TextBox tb_asz3;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox tb_asz2;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox tb_cim;
+        private System.Windows.Forms.TextBox tb_asz1;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox tb_cegnev;
+        private System.Windows.Forms.Label label9;
     }
 }

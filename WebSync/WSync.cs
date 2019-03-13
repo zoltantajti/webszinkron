@@ -6,6 +6,7 @@ using Datum;
 using System;
 using System.Data;
 using System.Windows.Forms;
+using Configuration;
 
 namespace WebSync
 {
@@ -15,7 +16,8 @@ namespace WebSync
         private MySQL mysql;
         private MSSQL mssql;
         private LocalDate ld;
-
+        private Cfg cfg;
+        
         #region Szinkronizálás Webáruház -> Számlázó
         public string Run(NotifyIcon notif)
         {
@@ -137,8 +139,8 @@ namespace WebSync
             string vals = "'FELRE_" + row["ident"] + "'," +
                 "" + ld.getLocalYear().Replace(".",string.Empty) + "," +
                 "0," +
-                "'Webshop'," +
-                "'Webshop adatok'," +
+                "'" + cfg.getCfg("cegnev") + "'," +
+                "'" + cfg.getCfg("cegcim") + "\r\nAdószám:" + cfg.getCfg("adoszam") + "'," +
                 "0," +
                 "'" + row["vezeteknev"] + " " + row["keresztnev"] + "'," +
                 "'" + row["irsz"] + " " + row["varos"] + ", " + row["cim"] + " " + row["cim2"] + "'," +
@@ -231,5 +233,7 @@ namespace WebSync
             return value;
         }
         #endregion
+
+
     }
 }

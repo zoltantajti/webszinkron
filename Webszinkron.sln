@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Datum", "Datum\Datum.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSync", "WebSync\WebSync.csproj", "{2D76D9A1-04D1-4F88-BB77-3420B309DFA1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinVer", "WinVer\WinVer.csproj", "{6C001540-381B-4B55-82D6-DAC0FF9CD12D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductSync", "ProductSync\ProductSync.csproj", "{F30DFCFE-2F5B-4645-9C98-D1F940BB9D91}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +85,22 @@ Global
 		{2D76D9A1-04D1-4F88-BB77-3420B309DFA1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2D76D9A1-04D1-4F88-BB77-3420B309DFA1}.Release|x64.ActiveCfg = Release|x64
 		{2D76D9A1-04D1-4F88-BB77-3420B309DFA1}.Release|x64.Build.0 = Release|x64
+		{6C001540-381B-4B55-82D6-DAC0FF9CD12D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C001540-381B-4B55-82D6-DAC0FF9CD12D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C001540-381B-4B55-82D6-DAC0FF9CD12D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6C001540-381B-4B55-82D6-DAC0FF9CD12D}.Debug|x64.Build.0 = Debug|Any CPU
+		{6C001540-381B-4B55-82D6-DAC0FF9CD12D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C001540-381B-4B55-82D6-DAC0FF9CD12D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C001540-381B-4B55-82D6-DAC0FF9CD12D}.Release|x64.ActiveCfg = Release|Any CPU
+		{6C001540-381B-4B55-82D6-DAC0FF9CD12D}.Release|x64.Build.0 = Release|Any CPU
+		{F30DFCFE-2F5B-4645-9C98-D1F940BB9D91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F30DFCFE-2F5B-4645-9C98-D1F940BB9D91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F30DFCFE-2F5B-4645-9C98-D1F940BB9D91}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F30DFCFE-2F5B-4645-9C98-D1F940BB9D91}.Debug|x64.Build.0 = Debug|Any CPU
+		{F30DFCFE-2F5B-4645-9C98-D1F940BB9D91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F30DFCFE-2F5B-4645-9C98-D1F940BB9D91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F30DFCFE-2F5B-4645-9C98-D1F940BB9D91}.Release|x64.ActiveCfg = Release|Any CPU
+		{F30DFCFE-2F5B-4645-9C98-D1F940BB9D91}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

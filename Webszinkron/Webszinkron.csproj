@@ -237,9 +237,17 @@
       <Project>{2d94ec09-2860-4cba-b9af-804dc6b54828}</Project>
       <Name>EHandler</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ProductSync\ProductSync.csproj">
+      <Project>{f30dfcfe-2f5b-4645-9c98-d1f940bb9d91}</Project>
+      <Name>ProductSync</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WebSync\WebSync.csproj">
       <Project>{2d76d9a1-04d1-4f88-bb77-3420b309dfa1}</Project>
       <Name>WebSync</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WinVer\WinVer.csproj">
+      <Project>{6c001540-381b-4b55-82d6-dac0ff9cd12d}</Project>
+      <Name>WinVer</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

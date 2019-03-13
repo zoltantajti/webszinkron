@@ -112,6 +112,10 @@
       <Project>{2d85953f-369d-4872-ac92-a5a92450f46e}</Project>
       <Name>Configuration</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Crypting\Crypting.csproj">
+      <Project>{32227c43-5b1a-4fe7-b981-034f5d9678c7}</Project>
+      <Name>Crypting</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EHandler\EHandler.csproj">
       <Project>{2d94ec09-2860-4cba-b9af-804dc6b54828}</Project>
       <Name>EHandler</Name>

@@ -1,33 +1,47 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
-using System.Diagnostics;
 using System.Windows.Forms;
 using Configuration;
+using Crypting;
 namespace Database
 {
     public class MSSQL
     {
         public Cfg cfg;
         private SqlConnection conn;
+        private Base64 base64;
         private string file;
         public MSSQL()
         {
             cfg = new Cfg();
             file = cfg.getCfg("mssqlfile");
+            base64 = new Base64();
             conn = new SqlConnection();
-            string cs = @"Data Source=(local)\NATURASOFT;Database=ns_szamlapro_WebshopKft;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            string dbfile = cfg.getCfg("mssqldbname");
+            string[] db = dbfile.Split('.');
+            string dbname = db[0];
+            string cs = @"Data Source=(local)\NATURASOFT;Database="+dbname+";Integrated Security=True;Connect Timeout=10;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
             conn.ConnectionString = cs;
         }
         private bool OpenConnection()
         {
-            try
+            if (conn.State == ConnectionState.Closed)
             {
-                conn.Open();
+                try
+                {
+                    conn.Open();
+                    return true;
+                }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show(ex.Message, "MSSQL Csatlakozási Hiba", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("A kapcsolat már nyitva van!", "MSSQL Csatlakozási Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return true;
-            }catch(SqlException ex)
-            {
-                MessageBox.Show(ex.Message);
-                return false;
             }
         }
         private bool CloseConnection()
@@ -58,7 +72,7 @@ namespace Database
                 }
                 catch (SqlException ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show(ex.Message, "MSSQL Lekérési Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 return resp;
             }
@@ -92,11 +106,10 @@ namespace Database
                     this.CloseConnection();
                 }catch(SqlException ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show(ex.Message, "MSSQL Beviteli Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             };
         }
-
         public void changeFile(string newfile)
         {
             file = newfile;

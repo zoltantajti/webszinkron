@@ -18,7 +18,13 @@ namespace Configuration
         #endregion
 
         #region MSSQL
-        private string mssql_file;
+        private string mssqldbname;
+        #endregion
+
+        #region Cégadatok
+        private string cegnev;
+        private string adoszam;
+        private string cegcim;
         #endregion
 
         #region global
@@ -43,7 +49,10 @@ namespace Configuration
                 if (l[0] == "pwd") { sqlpass = l[1]; };
                 if (l[0] == "dbname") { sqldbname = l[1]; };
                 if (l[0] == "timer") { t_interval = int.Parse(l[1]); };
-                if (l[0] == "mssqlfile") { mssql_file = l[1]; };
+                if (l[0] == "mssqldbname") { mssqldbname = l[1]; };
+                if (l[0] == "cegnev") { cegnev = l[1]; };
+                if (l[0] == "adoszam") { adoszam = l[1]; };
+                if (l[0] == "cegcim") { cegcim = l[1]; };
             }
             reader.Close();
         }
@@ -59,7 +68,10 @@ namespace Configuration
                 case "sqlpass": r =  sqlpass; break;
                 case "sqldb": r =  sqldbname; break;
                 case "interval": r = t_interval.ToString(); break;
-                case "mssqlfile": r = mssql_file; break;
+                case "mssqldbname": r = mssqldbname; break;
+                case "cegnev": r = cegnev; break;
+                case "adoszam": r = adoszam; break;
+                case "cegcim": r = cegcim; break;
                 default: r = string.Empty; break;
             }
             return r;

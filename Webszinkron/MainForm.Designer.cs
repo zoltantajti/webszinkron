@@ -37,6 +37,7 @@
             this.súgóToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.footStrip = new System.Windows.Forms.StatusStrip();
             this.tlbl_license = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lb_nextSync = new System.Windows.Forms.ToolStripStatusLabel();
             this.notif = new System.Windows.Forms.NotifyIcon(this.components);
             this.notif_CMS = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.showProgram = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,8 +48,8 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.btn_Sync = new System.Windows.Forms.Button();
             this.t_sync = new System.Windows.Forms.Timer(this.components);
-            this.lb_nextSync = new System.Windows.Forms.ToolStripStatusLabel();
             this.t_countdown = new System.Windows.Forms.Timer(this.components);
+            this.t_priceSync = new System.Windows.Forms.Timer(this.components);
             this.headMenu.SuspendLayout();
             this.footStrip.SuspendLayout();
             this.notif_CMS.SuspendLayout();
@@ -113,6 +114,14 @@
             this.tlbl_license.Name = "tlbl_license";
             this.tlbl_license.Size = new System.Drawing.Size(118, 17);
             this.tlbl_license.Text = "toolStripStatusLabel1";
+            // 
+            // lb_nextSync
+            // 
+            this.lb_nextSync.Name = "lb_nextSync";
+            this.lb_nextSync.Size = new System.Drawing.Size(669, 17);
+            this.lb_nextSync.Spring = true;
+            this.lb_nextSync.Text = "toolStripStatusLabel1";
+            this.lb_nextSync.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // notif
             // 
@@ -201,18 +210,15 @@
             // 
             this.t_sync.Tick += new System.EventHandler(this.t_sync_Tick);
             // 
-            // lb_nextSync
-            // 
-            this.lb_nextSync.Name = "lb_nextSync";
-            this.lb_nextSync.Size = new System.Drawing.Size(638, 17);
-            this.lb_nextSync.Spring = true;
-            this.lb_nextSync.Text = "toolStripStatusLabel1";
-            this.lb_nextSync.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // t_countdown
             // 
             this.t_countdown.Interval = 1000;
             this.t_countdown.Tick += new System.EventHandler(this.t_countdown_Tick);
+            // 
+            // t_priceSync
+            // 
+            this.t_priceSync.Interval = 10000;
+            this.t_priceSync.Tick += new System.EventHandler(this.t_priceSync_Tick);
             // 
             // MainForm
             // 
@@ -262,6 +268,7 @@
         public System.Windows.Forms.Timer t_sync;
         private System.Windows.Forms.ToolStripStatusLabel lb_nextSync;
         private System.Windows.Forms.Timer t_countdown;
+        private System.Windows.Forms.Timer t_priceSync;
     }
 }
 

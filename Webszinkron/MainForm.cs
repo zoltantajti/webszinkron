@@ -2,7 +2,6 @@
 using System.IO;
 using System.Windows.Forms;
 using System.Drawing;
-using System.Data;
 
 using Crypting;
 using Configuration;
@@ -10,6 +9,7 @@ using Database;
 using Datum;
 using WebSync;
 using EHandler;
+using ProductSync;
 
 namespace Webszinkron
 {
@@ -23,6 +23,7 @@ namespace Webszinkron
         public MSSQL mssql;
         public LocalDate local;
         public WSync wsync;
+        public Prices prices;
         
         public string lic_name;
         public string lic_mail;
@@ -59,16 +60,17 @@ namespace Webszinkron
 
             cfg = new Cfg();
             mysql = new MySQL();
-            mssql = new MSSQL();
+            //mssql = new MSSQL();
             local = new LocalDate();
             wsync = new WSync();
             handler = new Handler();
-
+            prices = new Prices();
 
 
             Sync(); //Program indításkor automatikusan szinkronizál!
             t_sync.Start();
             t_countdown.Start();
+            t_priceSync.Start();
             updateTimerInterval();
             rtb_log.ReadOnly = true;
         }
@@ -203,6 +205,10 @@ namespace Webszinkron
         {
             Sync();
         }
+        private void t_priceSync_Tick(object sender, EventArgs e)
+        {
+            PriceSync();
+        }
         #endregion
 
         #region navbar
@@ -217,6 +223,13 @@ namespace Webszinkron
         private void Sync()
         {
             writeLog(wsync.Run(notif), 0);
+
+            //writeLog(prices.updatePrices(), 0);
+        }
+
+        private void PriceSync()
+        {
+            //writeLog(prices.updatePrices(), 0);
         }
 
         #endregion
