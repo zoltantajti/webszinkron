@@ -1,9 +1,15 @@
 <h1>Webszinkron</h1>
 <h3><center>a Joomla VirueMart és a NaturaSoft számlázó között</center></h3>
 <hr />
-<h3>2019.03.11. 21:28 -> v0.98b verzió</h3>
+<h3>2019.03.13. 18:57 -> v1.0b verzió</h3>
 <ul>
-  <li><b>Teljes szinkron működőképes</b></li>
+  <li>Nincs értesítés, ha nincs új rendelés</li>
+  <li>Telepítéskor parancsikont helyez el az asztalon</li>
+</ul>
+
+<h3>2019.03.11. 21:28 -> v0.9b verzió</h3>
+<ul>
+  <li><b>Új rendelések letöltése</b></li>
   <li>Windows 7 x86/x64 és Windows 10 x86/x64 kompatibilis</li>
   <li>Optimalizált adatlekérés. Csak a szükséges adatokat tölti be</li>
   <li>MySQL -> MSSQL transzformáció az adatokhoz</li>
