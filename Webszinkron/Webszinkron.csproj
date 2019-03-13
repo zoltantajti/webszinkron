@@ -13,8 +13,8 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <IsWebBootstrapper>true</IsWebBootstrapper>
-    <PublishUrl>ftp://netlord.info/snyc/</PublishUrl>
-    <Install>false</Install>
+    <PublishUrl>ftp://netlord.info/</PublishUrl>
+    <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
@@ -24,6 +24,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>http://demo.netlord.info/sync/</InstallUrl>
+    <UpdateUrl>http://demo.netlord.info/sync/</UpdateUrl>
     <SupportUrl>http://demo.netlord.info/sync/</SupportUrl>
     <ErrorReportUrl>http://demo.netlord.info/sync/</ErrorReportUrl>
     <ProductName>Webszinkron</ProductName>
@@ -31,8 +32,8 @@
     <SuiteName>Zoltán Tajti</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>2</ApplicationRevision>
-    <ApplicationVersion>0.9.8.%2a</ApplicationVersion>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>

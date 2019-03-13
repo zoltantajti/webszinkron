@@ -19,6 +19,7 @@ namespace WebSync
         #region Szinkronizálás Webáruház -> Számlázó
         public string Run(NotifyIcon notif)
         {
+            int rq = 0;
             string retString;
             try
             {
@@ -32,6 +33,7 @@ namespace WebSync
                     "qz3vf_virtuemart_orders as ot LEFT JOIN qz3vf_virtuemart_order_userinfos as ut ON(ut.virtuemart_order_id = ot.virtuemart_order_id) WHERE ot.synced = 0";
                 DataTable get = mysql.QSelect(q);
                 int rowsCount = get.Rows.Count;
+                rq = rowsCount;
                 for (int i = 0; i <= rowsCount - 1; i++)
                 {
                     string orderID = get.Rows[i]["orderid"].ToString();
@@ -65,9 +67,11 @@ namespace WebSync
                 notif.BalloonTipIcon = ToolTipIcon.Error;
                 retString = ex.Message;
             }
-
-            notif.BalloonTipText = retString;
-            notif.ShowBalloonTip(1000);
+            if (rq > 0)
+            {
+                notif.BalloonTipText = retString;
+                notif.ShowBalloonTip(1000);
+            };
             return retString;
         }
         #endregion
