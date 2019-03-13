@@ -28,4 +28,3 @@
 <hr />
 <h3>2019.03.08. 21:30 -> Első feltöltés</h3>
 <b>Visual Studio, Windows Form Application alapkód</b>
-
