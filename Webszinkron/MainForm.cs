@@ -60,7 +60,7 @@ namespace Webszinkron
 
             cfg = new Cfg();
             mysql = new MySQL();
-            //mssql = new MSSQL();
+            mssql = new MSSQL();
             local = new LocalDate();
             wsync = new WSync();
             handler = new Handler();
@@ -68,6 +68,10 @@ namespace Webszinkron
 
 
             Sync(); //Program indításkor automatikusan szinkronizál!
+
+            PriceSync();
+
+
             t_sync.Start();
             t_countdown.Start();
             t_priceSync.Start();
@@ -190,7 +194,7 @@ namespace Webszinkron
             interv = (interval / 1000);
             _interv = (interval / 1000);
             t_sync.Interval = interval;
-
+            t_priceSync.Interval = interval;
             lb_nextSync.Text = "A következő szinkronizálás: " + interv.ToString() + " másodperc";
         }
         private void t_countdown_Tick(object sender, EventArgs e)
@@ -223,13 +227,11 @@ namespace Webszinkron
         private void Sync()
         {
             writeLog(wsync.Run(notif), 0);
-
-            //writeLog(prices.updatePrices(), 0);
         }
 
         private void PriceSync()
         {
-            //writeLog(prices.updatePrices(), 0);
+            writeLog(prices.updatePrices(notif), 0);
         }
 
         #endregion

@@ -1,5 +1,7 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Configuration;
 using Crypting;
@@ -11,7 +13,8 @@ namespace Database
         private SqlConnection conn;
         private Base64 base64;
         private string file;
-        public MSSQL()
+        private string cs;
+        public MSSQL(int autoconnect = 0)
         {
             cfg = new Cfg();
             file = cfg.getCfg("mssqlfile");
@@ -20,10 +23,14 @@ namespace Database
             string dbfile = cfg.getCfg("mssqldbname");
             string[] db = dbfile.Split('.');
             string dbname = db[0];
-            string cs = @"Data Source=(local)\NATURASOFT;Database="+dbname+";Integrated Security=True;Connect Timeout=10;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            cs = @"Data Source=(local)\NATURASOFT;Database="+dbname+";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=false";
             conn.ConnectionString = cs;
+            if(autoconnect == 1)
+            {
+                this.OpenConnection("Autoconnect");
+            }
         }
-        private bool OpenConnection()
+        private bool OpenConnection(string debug = "")
         {
             if (conn.State == ConnectionState.Closed)
             {
@@ -34,16 +41,18 @@ namespace Database
                 }
                 catch (SqlException ex)
                 {
-                    MessageBox.Show(ex.Message, "MSSQL Csatlakozási Hiba", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
+                    Debug.WriteLine(ex.Message);
+                    MessageBox.Show(debug + "\r\n" + ex.Message, "MSSQL Csatlakozási Hiba", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
                     return false;
                 }
             }
             else
             {
-                MessageBox.Show("A kapcsolat már nyitva van!", "MSSQL Csatlakozási Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show(debug + "\r\nA kapcsolat már nyitva van!", "MSSQL Csatlakozás", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return true;
             }
         }
+
         private bool CloseConnection()
         {
             try
@@ -56,35 +65,41 @@ namespace Database
                 return false;
             }
         }
-        public DataTable Select(string tabla, string mit = "*", string cond = "")
+        public DataTable Select(string tabla, string mit = "*", string cond = "", string reference="")
         {
             DataTable resp = new DataTable();
             string query = "SELECT " + mit + " FROM " + tabla + " " + cond;
             if (this.OpenConnection() == true)
             {
-                try
+                DataTable ret = new DataTable();
+                if (this.OpenConnection() == true)
                 {
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.ExecuteNonQuery();
-                    SqlDataAdapter da = new SqlDataAdapter(cmd);
-                    da.Fill(resp);
-                    this.CloseConnection();
+                    try
+                    {
+                        SqlCommand cmd = new SqlCommand(query, conn);
+                        cmd.ExecuteNonQuery();
+                        SqlDataAdapter da = new SqlDataAdapter(cmd);
+                        da.Fill(ret);
+                        this.CloseConnection();
+                        return ret;
+                    }
+                    catch (SqlException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                        return ret;
+                    }
                 }
-                catch (SqlException ex)
+                else
                 {
-                    MessageBox.Show(ex.Message, "MSSQL Lekérési Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return ret;
                 }
-                return resp;
-            }
-            else
-            {
-                return resp;
-            }
+            };
+            return resp;
         }
         public int LastIndex(string tabla, string mit = "ID", string cond = "")
         {
             string qry = "SELECT max(" + mit + ") FROM " + tabla;
-            if(this.OpenConnection() == true)
+            if(this.OpenConnection("LastINdex") == true)
             {
                 SqlCommand cmd = new SqlCommand(qry, conn);
                 int last = (int)cmd.ExecuteScalar();
@@ -97,7 +112,7 @@ namespace Database
         public void Insert(string tabla, string fields, string values)
         {
             string query = "INSERT INTO " + tabla + " (" + fields + ") VALUES (" + values + ")";
-            if(this.OpenConnection() == true)
+            if(this.OpenConnection("Insert") == true)
             {
                 try
                 {

@@ -208,6 +208,7 @@
             // 
             // t_sync
             // 
+            this.t_sync.Interval = 30000;
             this.t_sync.Tick += new System.EventHandler(this.t_sync_Tick);
             // 
             // t_countdown
@@ -217,7 +218,7 @@
             // 
             // t_priceSync
             // 
-            this.t_priceSync.Interval = 10000;
+            this.t_priceSync.Interval = 30000;
             this.t_priceSync.Tick += new System.EventHandler(this.t_priceSync_Tick);
             // 
             // MainForm

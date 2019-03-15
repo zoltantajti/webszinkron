@@ -23,7 +23,14 @@ namespace Crypting
         }
         public bool ChechHash(string hash1, string hash2)
         {
-            if (hash1 == hash2) return true; else return false;
+            if (hash1 == hash2)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

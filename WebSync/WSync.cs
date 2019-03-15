@@ -7,6 +7,7 @@ using System;
 using System.Data;
 using System.Windows.Forms;
 using Configuration;
+using System.Threading.Tasks;
 
 namespace WebSync
 {
@@ -28,6 +29,7 @@ namespace WebSync
                 mysql = new MySQL();
                 mysql.DBConnect();
                 mssql = new MSSQL();
+                cfg = new Cfg();
                 ld = new LocalDate();
                 string syncStart = ld.getLocalTime();
                 string q = "SELECT ot.virtuemart_order_id as orderid, ot.order_number as ident, ot.order_total as brutto, ot.order_salesPrice as netto, ot.order_billTaxAmount as afa, " +
