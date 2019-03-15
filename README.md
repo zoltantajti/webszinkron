@@ -2,6 +2,10 @@
 <h3><center>a Joomla VirueMart és a NaturaSoft számlázó között</center></h3>
 <b>Függőség: <a href="https://dotnet.microsoft.com/download/dotnet-framework-runtime/net472" target="_blank">.NET Framework 4.7.2</a></b>
 <hr />
+<h3>2019.03.13. 18:57 -> új feltöltés</h3>
+<ul>
+  <li>Elkezdtem az árak szinkronizálását, de az MSSQL logint kér, holott a rendelések lekérésénél hibátlanul működik. Nem tudom mi lehet a hiba</li>
+</ul>
 <h3>2019.03.13. 18:57 -> v1.0b verzió</h3>
 <ul>
   <li>Nincs értesítés, ha nincs új rendelés</li>
