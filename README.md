@@ -2,6 +2,25 @@
 <h3><center>a Joomla VirueMart és a NaturaSoft számlázó között</center></h3>
 <b>Függőség: <a href="https://dotnet.microsoft.com/download/dotnet-framework-runtime/net472" target="_blank">.NET Framework 4.7.2</a></b>
 <hr />
+<h3>2019.03.15. 16:47 -> új feltöltés</h3>
+<ul>
+  <li>
+    Címkeresés előkészítve. Címkezelés menete:
+    <ul>
+      <li>Ha nincs név, akkor felviszi az adatokat</li>
+      <li>Ha van név, de nem egyezik az irányítószám, akkor felviszi az adatokat</li>
+      <li>Ha van név, egyezik az irsz, de más az utca, akkor feltölt</li>
+      <li>Ha van név, egyezik az irsz + az utca<sup>1</sup> akkor feltölt</li>
+      <li>Egyébként kikeresi a NATURA_ID-t.</li>
+    </ul>
+    <p><sup>1</sup> = Utca, házszám formálása az alábbi formára:<br/>
+    Béke út 34. ==> békeu34 (mindent kisbetűvel; szóközök nélkül<br/>
+    valamint az út, utca, u cseréje, hogy simán "u" legyen és ha van a végén pont, azt is eltávolítjuk<br/>
+    Ezáltal elkerülhető, hogy ugyan azon személy, ugyanazzal a címmel többször szerepeljen az ügyféltörzsben,<br/>
+    egyszerű elgépelések miatt.</p>
+  </li>
+</ul>
+
 <h3>2019.03.15. 13:21 -> új feltöltés</h3>
 <ul>
   <li>Árszinkron működik</li>
