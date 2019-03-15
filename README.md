@@ -2,7 +2,7 @@
 <h3><center>a Joomla VirueMart és a NaturaSoft számlázó között</center></h3>
 <b>Függőség: <a href="https://dotnet.microsoft.com/download/dotnet-framework-runtime/net472" target="_blank">.NET Framework 4.7.2</a></b>
 <hr />
-<h3>2019.03.15. 16:47 -> új feltöltés</h3>
+<h3>2019.03.15. 16:47 -> új feltöltés  (v1.0e)</h3>
 <ul>
   <li>
     Címkeresés előkészítve. Címkezelés menete:
@@ -21,12 +21,12 @@
   </li>
 </ul>
 
-<h3>2019.03.15. 13:21 -> új feltöltés</h3>
+<h3>2019.03.15. 13:21 -> új feltöltés  (v1.0d)</h3>
 <ul>
   <li>Árszinkron működik</li>
 </ul>
 
-<h3>2019.03.13. 18:57 -> új feltöltés</h3>
+<h3>2019.03.13. 18:57 -> új feltöltés: (v1.0c)</h3>
 <ul>
   <li>Elkezdtem az árak szinkronizálását, de az MSSQL logint kér, holott a rendelések lekérésénél hibátlanul működik. Nem tudom mi lehet a hiba</li>
 </ul>
