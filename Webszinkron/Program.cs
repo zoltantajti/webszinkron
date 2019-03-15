@@ -13,7 +13,7 @@ namespace Webszinkron
         /// </summary>
         [STAThread]
         static void Main()
-        {
+      {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             try

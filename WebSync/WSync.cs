@@ -34,7 +34,7 @@ namespace WebSync
                 string syncStart = ld.getLocalTime();
                 string q = "SELECT ot.virtuemart_order_id as orderid, ot.order_number as ident, ot.order_total as brutto, ot.order_salesPrice as netto, ot.order_billTaxAmount as afa, " +
                     "ot.virtuemart_paymentmethod_id as payID, ut.last_name as keresztnev, ut.first_name as vezeteknev, ut.address_1 as cim, ut.address_2 as cim2, ut.city as varos, ut.zip as irsz FROM " +
-                    "qz3vf_virtuemart_orders as ot LEFT JOIN qz3vf_virtuemart_order_userinfos as ut ON(ut.virtuemart_order_id = ot.virtuemart_order_id) WHERE ot.synced = 0";
+                    "qz3vf_virtuemart_orders as ot LEFT JOIN qz3vf_virtuemart_order_userinfos as ut ON(ut.virtuemart_order_id = ot.virtuemart_order_id) WHERE ot.synced = 0 AND type = 'BT'";
                 DataTable get = mysql.QSelect(q);
                 int rowsCount = get.Rows.Count;
                 rq = rowsCount;
@@ -46,6 +46,8 @@ namespace WebSync
                     string szamla_vals = this.getSzamlaValues(get.Rows[i]);
                     mssql.Insert("SZAMLA", szamla_fields, szamla_vals);
                     int lastID = mssql.LastIndex("SZAMLA");
+                    //Ügyfél feltöltése
+                    //this.insertUser(get, i);
                     //Számlatételek lehívása
                     string fields = "order_item_name, order_item_sku, product_quantity, product_priceWithoutTax, product_basePriceWithTax, product_tax";
                     string iq = "SELECT " + fields + " FROM `qz3vf_virtuemart_order_items` WHERE virtuemart_order_id = " + orderID + "";
@@ -77,6 +79,55 @@ namespace WebSync
                 notif.ShowBalloonTip(1000);
             };
             return retString;
+        }
+        #endregion
+
+        #region user update
+        private void insertUser(DataTable get, int i)
+        {
+            DataRow item = get.Rows[0];
+            string szlaname = item["vezeteknev"].ToString() + " " + item["keresztnev"].ToString();
+            string szlairsz = item["irsz"].ToString();
+            string szlavaros = item["varos"].ToString();
+            string szlacim = item["cim"].ToString();
+
+            string q = "SELECT ot.virtuemart_order_id as orderid, ot.order_number as ident, ot.order_total as brutto, ot.order_salesPrice as netto, ot.order_billTaxAmount as afa, " +
+                "ot.virtuemart_paymentmethod_id as payID, ut.last_name as keresztnev, ut.first_name as vezeteknev, ut.address_1 as cim, ut.address_2 as cim2, ut.city as varos, " +
+                "ut.zip as irsz, ut.address_type as type FROM qz3vf_virtuemart_orders as ot LEFT JOIN qz3vf_virtuemart_order_userinfos as ut ON(ut.virtuemart_order_id = ot.virtuemart_order_id) " +
+                "WHERE ot.virtuemart_order_id = " + item["orderid"] + " AND ot.type = 'ST'";
+            int have = mysql.QCount(q);
+            if(have == 1)
+            {
+                DataTable _post = mysql.QSelect(q);
+                DataRow post = _post.Rows[0];
+                string postnev = post["vezeteknev"].ToString() + " " + post["keresztnev"].ToString();
+                string postirsz = post["irsz"].ToString();
+                string postvaros = post["varos"].ToString();
+                string postcim = post["cim"].ToString();
+            }
+            else
+            {
+                string postnev = szlaname;
+                string postirsz = szlairsz;
+                string postvaros = szlavaros;
+                string postcim = szlacim;
+            }
+
+            /**
+             *  Címkezelés menete:
+             *  Ha nincs név, akkor felviszi az adatokat
+             *  Ha van név, de nem egyezik az irányítószám, akkor felviszi az adatokat
+             *  Ha van név, egyezik az irsz, de más az utca, akkor feltölt
+             *  Ha van név, egyezik az irsz + az utca* akkor feltölt
+             *  Egyébként kikeresi a NATURA_ID-t.
+             *  
+             *  *= Utca, házszám formálása az alábbi formára:
+             *  Béke út 34. ==> békeu34 (mindent kisbetűvel; szóközök nélkül
+             *  valamint az út, utca, u cseréje, hogy simán "u" legyen és ha van a végén pont, azt is eltávolítjuk
+             *  Ezáltal elkerülhető, hogy ugyan azon személy, ugyanazzal a címmel többször szerepeljen az ügyféltörzsben,
+             *  egyszerű elgépelések miatt.
+             * **/
+
         }
         #endregion
 

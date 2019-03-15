@@ -22,6 +22,12 @@ namespace ProductSync
             base64 = new Base64();
             ld = new LocalDate();
 
+            /**
+             * NE CSAK AZ ÁRAKAT FRISSÍTSE
+             * HANEM BÁRMI VÁLTOZHAT.
+             * TERMÉKNÉV, TERMÉKKÓD, ÁFA-kulcs             
+             **/
+
             DataTable mssql_base = mssql.Select("termek", "*", "", "updatePrices");
             int all = 0;
             int mod = 0;

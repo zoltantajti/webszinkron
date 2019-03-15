@@ -108,7 +108,21 @@ namespace Database
             }
             return 0;
         }
-
+        public int Count(string tabla, string mit="*", string cond = "")
+        {
+            string qry = "SELECT " + mit + " FROM " + tabla + " " + cond;
+            if(this.OpenConnection("Count") == true)
+            {
+                SqlCommand cmd = new SqlCommand(qry, conn);
+                int count = (int)cmd.ExecuteScalar();
+                this.CloseConnection();
+                return count;
+            }
+            else
+            {
+                return 0;
+            }
+        }
         public void Insert(string tabla, string fields, string values)
         {
             string query = "INSERT INTO " + tabla + " (" + fields + ") VALUES (" + values + ")";

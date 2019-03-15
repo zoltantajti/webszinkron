@@ -145,6 +145,22 @@ namespace Database
             }
         }
 
+        public int QCount(string q)
+        {
+            int count = -1;
+            if (this.OpenConnection() == true)
+            {
+                MySqlCommand cmd = new MySqlCommand(q, conn);
+                count = int.Parse(cmd.ExecuteScalar() + "");
+                this.CloseConnection();
+                return count;
+            }
+            else
+            {
+                return count;
+            }
+        }
+
         public int Count(string tabla, string mit = "*", string cond = "")
         {
             string query = "SELECT " + mit + " FROM " + tabla + " " + cond;
